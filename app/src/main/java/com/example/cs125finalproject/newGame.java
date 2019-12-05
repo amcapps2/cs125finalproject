@@ -23,8 +23,9 @@ public class newGame extends AppCompatActivity {
 
         continueButton = (Button) findViewById(R.id.continueButton);
         nameInput = (EditText) findViewById(R.id.nameInput);
-
         colorGroup = (RadioGroup) findViewById(R.id.colorGroup);
+
+        //gets info from button listeners and textfield when continue is clicked
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,12 +36,14 @@ public class newGame extends AppCompatActivity {
                 if (color.equals("")) {
                     color = "brown";
                 }
+                //runs startgame function w/ name and color
                 startGame(name, color);
             }
         });
     }
 
     public void startGame(String ferretName, String ferretColor) {
+        //creates an intent w needed information & passes it to the oncreate of game.java
         Intent intent = new Intent(this, game.class);
         intent.putExtra("ferretName", ferretName);
         intent.putExtra("ferretColor", ferretColor);

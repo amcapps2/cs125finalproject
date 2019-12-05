@@ -24,9 +24,9 @@ public class game extends AppCompatActivity {
     private ImageButton sleepButton;
     private int ferretHealth = 100;
     private ImageView happinessMeter;
+    private Handler timerHandler = new Handler();
 
-    //runs without a timer by reposting this handler at the end of the runnable
-    Handler timerHandler = new Handler();
+    //timer that decays the health of the ferret by 10 every 15 seconds
     Runnable timerRunnable = new Runnable() {
 
         @Override
@@ -36,11 +36,16 @@ public class game extends AppCompatActivity {
             if (seconds % 15 == 0 && ferretHealth >= 10) {
                 ferretHealth = ferretHealth - 10;
             }
+
+            //calls the updateHealth function, which updates the health icon
             updateHealth();
+
+            //re-runs the timer
             timerHandler.postDelayed(this, 500);
         }
     };
 
+    //re-sets the idle animation (after an action) depending on the chosen color
     public void setIdleAnimation(String color, Bundle b) {
         final ImageView ferretImage = (ImageView) findViewById(R.id.ferretImage);
         if (color.equals("brown") && b!= null) {
@@ -52,9 +57,9 @@ public class game extends AppCompatActivity {
         }
         final AnimationDrawable idleAnimation = (AnimationDrawable)ferretImage.getDrawable();
         idleAnimation.start();
-
     }
 
+    //updates the smiley face to match the current health level
     public void updateHealth() {
         happinessMeter = (ImageView) findViewById(R.id.happinessMeter);
         if (ferretHealth >= 80) {
@@ -68,19 +73,22 @@ public class game extends AppCompatActivity {
         }
     }
 
+    //oncreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        //timer
+        //begins running timer
         timerHandler.postDelayed(timerRunnable, 0);
         //get info from instance
         nameTagText = (TextView) findViewById(R.id.nameTagText);
         Intent intent = getIntent();
         final Bundle b = intent.getExtras();
         if(b!=null) {
+            //sets textview to the chosen name
             nameTagText.setText(b.get("ferretName").toString());
         }
+        //gets ferret's color
         final String ferretColor = b.get("ferretColor").toString();
         final ImageView ferretImage = (ImageView) findViewById(R.id.ferretImage);
 
@@ -92,10 +100,13 @@ public class game extends AppCompatActivity {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //clicking food adds 10 to health
                 if (ferretHealth != 100) {
                     ferretHealth = ferretHealth + 10;
                     updateHealth();
                 }
+
+                //sets food animation based on color
                 if (ferretColor.equals("brown") && b!= null) {
                     ferretImage.setImageResource(R.drawable.eat_brown);
                 } else if (ferretColor.equals("red") && b!= null) {
@@ -105,12 +116,13 @@ public class game extends AppCompatActivity {
                 }
                 AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
                 eatAnimation.start();
+
+                //sets a timer that ends the animation in 5 seconds
                 new CountDownTimer(5000, 1000) {
                     public void onFinish() {
                         // When timer is finished
                         setIdleAnimation(ferretColor, b);
                     }
-
                     public void onTick(long millisUntilFinished) {
                         // millisUntilFinished    The amount of time until finished.
                     }
@@ -131,10 +143,13 @@ public class game extends AppCompatActivity {
         sleepButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //when sleep button clicked adds 10 to health
                 if (ferretHealth != 100) {
                     ferretHealth = ferretHealth + 10;
                     updateHealth();
                 }
+
+                //sets animation based on color
                 if (ferretColor.equals("brown") && b!= null) {
                     ferretImage.setImageResource(R.drawable.sleep_brown);
                 } else if (ferretColor.equals("red") && b!= null) {
@@ -144,6 +159,8 @@ public class game extends AppCompatActivity {
                 }
                 AnimationDrawable sleepAnimation = (AnimationDrawable)ferretImage.getDrawable();
                 sleepAnimation.start();
+
+                //sets timer so animation runs for 5 seconds
                 new CountDownTimer(5000, 1000) {
                     public void onFinish() {
                         // When timer is finished

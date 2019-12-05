@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         newGameButton = (Button) findViewById(R.id.newGameButton);
+        //starts newGame (where u fill in the info) when clicked)
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
