@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ferretIcon.setImageResource(R.drawable.iconanimation);
         final AnimationDrawable iconanimation = (AnimationDrawable)ferretIcon.getDrawable();
         iconanimation.start();
+
     }
 
     public void startGameSetup() {

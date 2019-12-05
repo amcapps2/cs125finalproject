@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -25,6 +26,9 @@ public class game extends AppCompatActivity {
     private int ferretHealth = 100;
     private ImageView happinessMeter;
     private Handler timerHandler = new Handler();
+    private MediaPlayer music;
+    private static int MUSIC_PLAYED = 1;
+
 
     //timer that decays the health of the ferret by 10 every 15 seconds
     Runnable timerRunnable = new Runnable() {
@@ -80,6 +84,15 @@ public class game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         //begins running timer
         timerHandler.postDelayed(timerRunnable, 0);
+
+        //begins playing music
+        music = MediaPlayer.create(game.this,R.raw.milkworld);
+        if (MUSIC_PLAYED == 1) {
+            music.start();
+            music.setLooping(true);
+            MUSIC_PLAYED = 0;
+        }
+
         //get info from instance
         nameTagText = (TextView) findViewById(R.id.nameTagText);
         Intent intent = getIntent();
@@ -105,7 +118,6 @@ public class game extends AppCompatActivity {
                     ferretHealth = ferretHealth + 10;
                     updateHealth();
                 }
-
                 //sets food animation based on color
                 if (ferretColor.equals("brown") && b!= null) {
                     ferretImage.setImageResource(R.drawable.eat_brown);
@@ -148,7 +160,6 @@ public class game extends AppCompatActivity {
                     ferretHealth = ferretHealth + 10;
                     updateHealth();
                 }
-
                 //sets animation based on color
                 if (ferretColor.equals("brown") && b!= null) {
                     ferretImage.setImageResource(R.drawable.sleep_brown);
@@ -159,7 +170,6 @@ public class game extends AppCompatActivity {
                 }
                 AnimationDrawable sleepAnimation = (AnimationDrawable)ferretImage.getDrawable();
                 sleepAnimation.start();
-
                 //sets timer so animation runs for 5 seconds
                 new CountDownTimer(5000, 1000) {
                     public void onFinish() {
