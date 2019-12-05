@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90F8D5BA"
+    tools:context="com.example.application.myapplication.Activity2">
+
+    <LinearLayout
+        android:layout_width="369dp"
+        android:layout_height="242dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="122dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name:"
+            android:textColor="#E91E3C"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="choose a name"
+            android:textColor="#C0ADAD" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="color:"
+            android:textColor="#E91E3C"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/colorGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/redColorButton"
+                android:layout_width="69dp"
+                android:layout_height="wrap_content"
+                android:text="red"
+                android:textColor="#B9E91E3C" />
+
+            <RadioButton
+                android:id="@+id/grayColorButton"
+                android:layout_width="71dp"
+                android:layout_height="wrap_content"
+                android:text="gray"
+                android:textColor="#8A7C7C" />
+
+            <RadioButton
+                android:id="@+id/brownColorButton"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:text="brown"
+                android:textColor="#CF7862" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
+        android:layout_marginBottom="189dp"
+        android:background="#E91E3C"
+        android:text="continue"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
