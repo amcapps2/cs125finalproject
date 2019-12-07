@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -28,6 +32,9 @@ public class game extends AppCompatActivity {
     private Handler timerHandler = new Handler();
     private MediaPlayer music;
     private static int MUSIC_PLAYED = 1;
+    private SensorManager sensorManager;
+    private Sensor gyroscopeSensor;
+    private SensorEventListener gyroListener;
 
 
     //timer that decays the health of the ferret by 10 every 15 seconds
@@ -107,6 +114,49 @@ public class game extends AppCompatActivity {
 
         //set animation based on color
         setIdleAnimation(ferretColor, b);
+
+        //sets the gyroscope sensor
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+        gyroListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                if (sensorEvent.values[2] > 2 || sensorEvent.values[2] < -2) {
+                    if (ferretHealth != 100) {
+                        ferretHealth = ferretHealth + 10;
+                        updateHealth();
+                    }
+                    if (ferretColor.equals("brown") && b!= null) {
+                        ferretImage.setImageResource(R.drawable.eat_brown);
+                    } else if (ferretColor.equals("red") && b!= null) {
+                        ferretImage.setImageResource(R.drawable.eat_red);
+                    } else {
+                        ferretImage.setImageResource(R.drawable.eat_gray);
+                    }
+                    AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
+                    eatAnimation.start();
+
+                    new CountDownTimer(5000, 1000) {
+                        public void onFinish() {
+                            // When timer is finished
+                            setIdleAnimation(ferretColor, b);
+                        }
+                        public void onTick(long millisUntilFinished) {
+                            // millisUntilFinished    The amount of time until finished.
+                        }
+                    }.start();
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {}
+        };
+
+        //registers the gyroscope listener
+        sensorManager.registerListener(gyroListener, gyroscopeSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+
 
         //button listeners
         foodButton = (ImageButton) findViewById(R.id.foodButton);
