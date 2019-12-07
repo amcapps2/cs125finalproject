@@ -81,7 +81,7 @@ public class newGame extends AppCompatActivity {
 
     //gets randomName from server
     private void getRandomName() {
-        String url = "https://api.myjson.com/bins/1hceak";
+        String url = "https://api.myjson.com/bins/12z254";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
