@@ -12,6 +12,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -29,12 +30,18 @@ public class game extends AppCompatActivity {
     private ImageButton sleepButton;
     private int ferretHealth = 100;
     private ImageView happinessMeter;
+    private ImageView rollBall;
     private Handler timerHandler = new Handler();
     private MediaPlayer music;
     private static int MUSIC_PLAYED = 1;
     private SensorManager sensorManager;
     private Sensor gyroscopeSensor;
     private SensorEventListener gyroListener;
+    private float xmax;
+    private float xAcceleration;
+    private float xVelocity;
+    private float xPosition;
+    public float frameTime = 0.666f;
 
 
     //timer that decays the health of the ferret by 10 every 15 seconds
@@ -119,6 +126,9 @@ public class game extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
+        rollBall = (ImageView) findViewById(R.id.rollBall);
+        rollBall.setVisibility(ImageView.GONE);
+
         gyroListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
@@ -137,10 +147,20 @@ public class game extends AppCompatActivity {
                     AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
                     eatAnimation.start();
 
+                    rollBall.setVisibility(ImageView.VISIBLE);
+
+                    Display display = getWindowManager().getDefaultDisplay();
+                    xmax = (float) display.getWidth() - 50;
+                    xAcceleration = sensorEvent.values[2];
+
+                    updateBall();
+
+
                     new CountDownTimer(5000, 1000) {
                         public void onFinish() {
                             // When timer is finished
                             setIdleAnimation(ferretColor, b);
+                            rollBall.setVisibility(ImageView.GONE);
                         }
                         public void onTick(long millisUntilFinished) {
                             // millisUntilFinished    The amount of time until finished.
@@ -232,5 +252,16 @@ public class game extends AppCompatActivity {
                 }.start();
             }
         });
+    }
+
+    public void updateBall() {
+ /**       xVelocity += (xAcceleration * frameTime);
+        float xS = (xVelocity/2)*frameTime;
+        xPosition -= xS; **/
+        if (xAcceleration > 0) {
+            rollBall.setX(rollBall.getX() + (xAcceleration * 10));
+        } else if (xAcceleration < 0) {
+            rollBall.setX(rollBall.getX() + (xAcceleration * 10));
+        }
     }
 }

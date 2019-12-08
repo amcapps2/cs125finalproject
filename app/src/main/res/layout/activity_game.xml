@@ -89,6 +89,21 @@
         android:src="@drawable/brownferret1" />
 
     <ImageView
+        android:id="@+id/rollBall"
+        android:layout_width="139dp"
+        android:layout_height="104dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
+        android:layout_marginBottom="31dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ball"
+        tools:layout_constraintBottom_creator="1" />
+
+    <ImageView
         android:id="@+id/happinessMeter"
         android:layout_width="106dp"
         android:layout_height="74dp"
