@@ -42,6 +42,7 @@ public class game extends AppCompatActivity {
     private float xVelocity;
     private float xPosition;
     public float frameTime = 0.666f;
+    private int delay = 0;
 
 
     //timer that decays the health of the ferret by 10 every 15 seconds
@@ -129,38 +130,43 @@ public class game extends AppCompatActivity {
         rollBall = (ImageView) findViewById(R.id.rollBall);
         rollBall.setVisibility(ImageView.GONE);
 
+
         gyroListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 if (sensorEvent.values[2] > 2 || sensorEvent.values[2] < -2) {
-                    if (ferretHealth != 100) {
-                        ferretHealth = ferretHealth + 10;
-                        updateHealth();
-                    }
-                    if (ferretColor.equals("brown") && b!= null) {
-                        ferretImage.setImageResource(R.drawable.eat_brown);
-                    } else if (ferretColor.equals("red") && b!= null) {
-                        ferretImage.setImageResource(R.drawable.eat_red);
-                    } else {
-                        ferretImage.setImageResource(R.drawable.eat_gray);
-                    }
-                    AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
-                    eatAnimation.start();
+                    if (delay == 0) {
+                        delay = 1;
+                        if (ferretHealth != 100) {
+                            ferretHealth = ferretHealth + 10;
+                            updateHealth();
+                        }
+                        if (ferretColor.equals("brown") && b!= null) {
+                            ferretImage.setImageResource(R.drawable.play_brown);
+                        } else if (ferretColor.equals("red") && b!= null) {
+                            ferretImage.setImageResource(R.drawable.play_red);
+                        } else {
+                            ferretImage.setImageResource(R.drawable.play_gray);
+                        }
+                        AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
+                        eatAnimation.start();
 
-                    rollBall.setVisibility(ImageView.VISIBLE);
+                        rollBall.setVisibility(ImageView.VISIBLE);
+                    }
 
                     Display display = getWindowManager().getDefaultDisplay();
-                    xmax = (float) display.getWidth() - 50;
+                    xmax = (float) display.getWidth() - 10;
                     xAcceleration = sensorEvent.values[2];
 
                     updateBall();
 
 
-                    new CountDownTimer(5000, 1000) {
+                    new CountDownTimer(10000, 1000) {
                         public void onFinish() {
                             // When timer is finished
                             setIdleAnimation(ferretColor, b);
                             rollBall.setVisibility(ImageView.GONE);
+                            delay = 0;
                         }
                         public void onTick(long millisUntilFinished) {
                             // millisUntilFinished    The amount of time until finished.
@@ -209,16 +215,6 @@ public class game extends AppCompatActivity {
                         // millisUntilFinished    The amount of time until finished.
                     }
                 }.start();
-            }
-        });
-        playButton = (ImageButton) findViewById(R.id.playButton);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ferretHealth != 100) {
-                    ferretHealth = ferretHealth + 10;
-                    updateHealth();
-                }
             }
         });
         sleepButton = (ImageButton) findViewById(R.id.sleepButton);

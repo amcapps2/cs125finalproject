@@ -29,7 +29,6 @@ public class newGame extends AppCompatActivity {
     private EditText nameInput;
     private RadioGroup colorGroup;
     private RequestQueue mQueue;
-    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class newGame extends AppCompatActivity {
                 String color =
                         ((RadioButton)findViewById(colorGroup.getCheckedRadioButtonId()))
                                 .getText().toString();
-                if (color.equals("")) {
+                if (color.equals("") || color == null) {
                     color = "brown";
                 }
                 if (name == null || name.equals("")) {
