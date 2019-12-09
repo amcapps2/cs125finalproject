@@ -14,24 +14,25 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="63dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="54dp"
         android:layout_marginRight="63dp"
         android:src="@drawable/icon1" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        android:layout_width="222dp"
+        android:layout_height="103dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="58dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginRight="129dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginRight="77dp"
         android:text="virtual ferret"
         android:textColor="#E91E3C"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:fontFamily="@font/baloo_da" />
 
     <Button
         android:id="@+id/newGameButton"
@@ -45,8 +46,11 @@
         android:layout_marginBottom="53dp"
         android:background="#E91E3C"
         android:text="start new game"
+        app:fontFamily="@font/baloo_da"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FFFFFF"
         android:textSize="24sp" />
 
 </RelativeLayout>
+
+
