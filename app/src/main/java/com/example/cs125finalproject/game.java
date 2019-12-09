@@ -242,14 +242,14 @@ public class game extends AppCompatActivity {
     }
 
     public void updateBall(float xMax) {
-        float testVal = rollBall.getX() + (xAcceleration * 30);
+        float testVal = rollBall.getX() + (xAcceleration * 30 * -1);
         if (testVal >= xMax || testVal <= 0) {
             return;
         }
         if (xAcceleration > 0) {
-            rollBall.setX(rollBall.getX() + (xAcceleration * 30));
+            rollBall.setX(rollBall.getX() + (xAcceleration * 30 * -1));
         } else if (xAcceleration < 0) {
-            rollBall.setX(rollBall.getX() + (xAcceleration * 30));
+            rollBall.setX(rollBall.getX() + (xAcceleration * 30 * -1));
         }
     }
 }

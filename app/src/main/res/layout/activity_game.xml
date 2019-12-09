@@ -24,56 +24,22 @@
         android:id="@+id/nameTagText"
         android:layout_width="335dp"
         android:layout_height="53dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="76dp"
-        android:layout_marginRight="76dp"
-        android:paddingLeft="20dp"
-        android:text="name"
-        android:textColor="#E91E3C"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="106dp"
-        android:layout_below="@+id/nameTagText"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/foodButton"
-            android:layout_width="139dp"
-            android:layout_height="104dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/foodbowl" />
-
-        <ImageButton
-            android:id="@+id/playButton"
-            android:layout_width="139dp"
-            android:layout_height="104dp"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ball" />
-
-        <ImageButton
-            android:id="@+id/sleepButton"
-            android:layout_width="139dp"
-            android:layout_height="104dp"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/pillow" />
-    </LinearLayout>
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginRight="69dp"
+        android:paddingLeft="20dp"
+        android:text="name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#E91E3C"
+        android:textSize="20sp"
+        app:fontFamily="@font/baloo_da" />
 
     <ImageView
         android:id="@+id/ferretImage"
@@ -82,26 +48,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-19dp"
-        android:layout_marginRight="-19dp"
-        android:layout_marginBottom="-1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="14dp"
         android:scaleType="fitCenter"
         android:src="@drawable/brownferret1" />
-
-    <ImageView
-        android:id="@+id/rollBall"
-        android:layout_width="139dp"
-        android:layout_height="104dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="96dp"
-        android:layout_marginRight="96dp"
-        android:layout_marginBottom="31dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ball"
-        tools:layout_constraintBottom_creator="1" />
 
     <ImageView
         android:id="@+id/happinessMeter"
@@ -110,9 +61,66 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="298dp"
+        android:layout_marginLeft="298dp"
+        android:layout_marginTop="34dp"
+        app:srcCompat="@drawable/lvl4" />
+
+    <ImageButton
+        android:id="@+id/sleepButton"
+        android:layout_width="109dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="66dp"
-        app:srcCompat="@drawable/lvl4" />
+        android:layout_marginTop="291dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/pillow" />
+
+    <ImageButton
+        android:id="@+id/foodButton"
+        android:layout_width="109dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="219dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/foodbowl" />
+
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_width="109dp"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="143dp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ball" />
+
+    <ImageView
+        android:id="@+id/rollBall"
+        android:layout_width="139dp"
+        android:layout_height="109dp"
+        android:layout_alignStart="@+id/playButton"
+        android:layout_alignLeft="@+id/playButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="179dp"
+        android:layout_marginLeft="179dp"
+        android:layout_marginBottom="38dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/ball" />
 
 </RelativeLayout>
