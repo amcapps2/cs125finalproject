@@ -39,6 +39,8 @@ public class game extends AppCompatActivity {
     private SensorEventListener gyroListener;
     private float xAcceleration;
     private static int delay = 0;
+    private TextView ballInfo;
+    private ImageView getInfo;
 
     //timer that decays the health of the ferret by 10 every 15 seconds
     Runnable timerRunnable = new Runnable() {
@@ -123,7 +125,9 @@ public class game extends AppCompatActivity {
         gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
         rollBall = (ImageView) findViewById(R.id.rollBall);
+        ballInfo = (TextView) findViewById(R.id.ballInfo);
         rollBall.setVisibility(ImageView.GONE);
+        ballInfo.setVisibility(ImageView.GONE);
 
         gyroListener = new SensorEventListener() {
             @Override
@@ -232,6 +236,25 @@ public class game extends AppCompatActivity {
                     public void onFinish() {
                         // When timer is finished
                         setIdleAnimation(ferretColor, b);
+                    }
+                    public void onTick(long millisUntilFinished) {
+                        // millisUntilFinished    The amount of time until finished.
+                    }
+                }.start();
+            }
+        });
+        //button listeners
+        getInfo = (ImageView) findViewById(R.id.getInfo);
+        getInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ballInfo.setVisibility(ImageView.VISIBLE);
+
+                //sets a timer that ends the text in 5 seconds
+                new CountDownTimer(3000, 1000) {
+                    public void onFinish() {
+                        // When timer is finished
+                        ballInfo.setVisibility(ImageView.GONE);
                     }
                     public void onTick(long millisUntilFinished) {
                         // millisUntilFinished    The amount of time until finished.
