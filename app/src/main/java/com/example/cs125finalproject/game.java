@@ -37,13 +37,8 @@ public class game extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor gyroscopeSensor;
     private SensorEventListener gyroListener;
-    private float xmax;
     private float xAcceleration;
-    private float xVelocity;
-    private float xPosition;
-    public float frameTime = 0.666f;
-    private int delay = 0;
-
+    private static int delay = 0;
 
     //timer that decays the health of the ferret by 10 every 15 seconds
     Runnable timerRunnable = new Runnable() {
@@ -130,7 +125,6 @@ public class game extends AppCompatActivity {
         rollBall = (ImageView) findViewById(R.id.rollBall);
         rollBall.setVisibility(ImageView.GONE);
 
-
         gyroListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
@@ -150,31 +144,28 @@ public class game extends AppCompatActivity {
                         }
                         AnimationDrawable eatAnimation = (AnimationDrawable)ferretImage.getDrawable();
                         eatAnimation.start();
-
                         rollBall.setVisibility(ImageView.VISIBLE);
+                        new CountDownTimer(5000, 1000) {
+                            public void onFinish() {
+                                // When timer is finished
+                                setIdleAnimation(ferretColor, b);
+                                rollBall.setVisibility(ImageView.GONE);
+                                rollBall.setX(getWindowManager().getDefaultDisplay().getWidth()/2);
+                                delay = 0;
+                            }
+                            public void onTick(long millisUntilFinished) {
+                                // millisUntilFinished    The amount of time until finished.
+                            }
+                        }.start();
                     }
-
+                }
+                if (delay == 1) {
                     Display display = getWindowManager().getDefaultDisplay();
-                    xmax = (float) display.getWidth() - 10;
+                    float xMax = (float) display.getWidth() - 10;
                     xAcceleration = sensorEvent.values[2];
-
-                    updateBall();
-
-
-                    new CountDownTimer(10000, 1000) {
-                        public void onFinish() {
-                            // When timer is finished
-                            setIdleAnimation(ferretColor, b);
-                            rollBall.setVisibility(ImageView.GONE);
-                            delay = 0;
-                        }
-                        public void onTick(long millisUntilFinished) {
-                            // millisUntilFinished    The amount of time until finished.
-                        }
-                    }.start();
+                    updateBall(xMax);
                 }
             }
-
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {}
         };
@@ -250,14 +241,15 @@ public class game extends AppCompatActivity {
         });
     }
 
-    public void updateBall() {
- /**       xVelocity += (xAcceleration * frameTime);
-        float xS = (xVelocity/2)*frameTime;
-        xPosition -= xS; **/
+    public void updateBall(float xMax) {
+        float testVal = rollBall.getX() + (xAcceleration * 30);
+        if (testVal >= xMax || testVal <= 0) {
+            return;
+        }
         if (xAcceleration > 0) {
-            rollBall.setX(rollBall.getX() + (xAcceleration * 10));
+            rollBall.setX(rollBall.getX() + (xAcceleration * 30));
         } else if (xAcceleration < 0) {
-            rollBall.setX(rollBall.getX() + (xAcceleration * 10));
+            rollBall.setX(rollBall.getX() + (xAcceleration * 30));
         }
     }
 }
